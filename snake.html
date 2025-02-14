@@ -46,6 +46,17 @@
             font-size: 2rem;
             font-weight: bold;
         }
+
+        .game-over-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +68,9 @@
     </div>
     <div class="start-message" id="startMessage">
         Appuyez sur une touche pour démarrer
+    </div>
+    <div class="game-over-message" id="gameOverMessage">
+        Game Over! Appuyez sur R pour recommencer.
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
@@ -73,6 +87,7 @@
         let direction = "RIGHT";
         let food = generateFood();
         let gameStarted = false;
+        let gameOver = false;
 
         // Mettre à jour les scores
         function updateScores() {
@@ -126,7 +141,7 @@
 
             // Vérifier si le serpent touche les bords ou se mord lui-même
             if (snakeX < 0 || snakeY < 0 || snakeX >= canvasSize || snakeY >= canvasSize || collision(snakeX, snakeY)) {
-                return gameOver();
+                return gameOverHandler();
             }
 
             setTimeout(draw, speed); // Met à jour le jeu toutes les "speed" millisecondes
@@ -150,35 +165,42 @@
         }
 
         // Gestion de la fin du jeu
-        function gameOver() {
+        function gameOverHandler() {
             if (score > highScore) {
                 highScore = score;
                 localStorage.setItem('highScore', highScore); // Sauvegarder le high score
             }
             updateScores();
-            alert("Game Over! Score final: " + score);
-            snake = [{ x: 5 * box, y: 5 * box }];
-            direction = "RIGHT";
-            score = 0;
-            updateScores();
-            draw();
+            gameOver = true;
+            document.getElementById("gameOverMessage").style.display = "block";
         }
 
         // Gérer les contrôles
         document.addEventListener("keydown", directionControl);
 
         function directionControl(event) {
-            if (!gameStarted) {
+            if (!gameStarted && !gameOver) {
                 // Commencer le jeu si une touche est pressée
                 gameStarted = true;
                 document.getElementById("startMessage").style.display = "none"; // Masquer le message de démarrage
                 draw();
             }
-            
+
             if (event.keyCode === 37 && direction !== "RIGHT") direction = "LEFT";
             if (event.keyCode === 38 && direction !== "DOWN") direction = "UP";
             if (event.keyCode === 39 && direction !== "LEFT") direction = "RIGHT";
             if (event.keyCode === 40 && direction !== "UP") direction = "DOWN";
+
+            // Recommencer le jeu si le joueur appuie sur 'R'
+            if (gameOver && event.keyCode === 82) {
+                gameOver = false;
+                snake = [{ x: 5 * box, y: 5 * box }];
+                direction = "RIGHT";
+                score = 0;
+                updateScores();
+                document.getElementById("gameOverMessage").style.display = "none";
+                draw();
+            }
         }
 
         // Démarrer le jeu
