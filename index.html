@@ -10,18 +10,29 @@
 <body>
     <div class="container">
         <h1>Bienvenue sur le site de Mini Jeux</h1>
-        <div id="profile-container">
-            <input type="text" id="username" placeholder="Entrez votre pseudo">
-            <button onclick="saveProfile()">Créer un profil</button>
+        <div id="auth-container">
+            <div id="register-form">
+                <h2>Créer un compte</h2>
+                <input type="email" id="email" placeholder="Adresse e-mail">
+                <input type="password" id="password" placeholder="Mot de passe">
+                <input type="text" id="nickname" placeholder="Choisissez un surnom">
+                <button onclick="registerUser()">S'inscrire</button>
+            </div>
+            <div id="login-form">
+                <h2>Se connecter</h2>
+                <input type="email" id="login-email" placeholder="Adresse e-mail">
+                <input type="password" id="login-password" placeholder="Mot de passe">
+                <button onclick="loginUser()">Connexion</button>
+            </div>
         </div>
         <p id="welcome-message"></p>
-        <div class="game-links">
+        <div class="game-links" style="display: none;">
             <a href="guess-number.html" class="link-button">Devine le Nombre</a>
             <a href="cookie-clicker.html" class="link-button">Cookie Clicker</a>
             <a href="demineur.html" class="link-button">Démineur</a>
             <a href="snake.html" class="link-button">Snake</a>
         </div>
-        <button onclick="logout()" class="logout-button">Déconnexion</button>
+        <button onclick="logout()" class="logout-button" style="display: none;">Déconnexion</button>
     </div>
     <script src="profil.js"></script>
 </body>
