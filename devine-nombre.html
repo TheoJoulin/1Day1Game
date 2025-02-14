@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devine le Nombre</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            flex-direction: column;
+        }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #0073e6;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin: 20px 0;
+            width: 80%;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .result {
+            font-weight: bold;
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Devine le nombre</h1>
+        <p>Un nombre entre 1 et 100 a été généré. Devine lequel !</p>
+        <input type="number" id="guess" placeholder="Entrez votre nombre" min="1" max="100">
+        <button onclick="checkGuess()">Vérifier</button>
+        <p class="message" id="message"></p>
+        <a href="index.html" class="back-button">Retour à l'accueil</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            const messageElement = document.getElementById("message");
+            const guessInput = document.getElementById("guess");
+
+            window.checkGuess = () => {
+                const userGuess = parseInt(guessInput.value);
+
+                if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                    messageElement.textContent = "Veuillez entrer un nombre valide entre 1 et 100.";
+                    messageElement.className = "message error";
+                    return;
+                }
+
+                if (userGuess === randomNumber) {
+                    messageElement.textContent = `Félicitations ! Vous avez deviné le bon nombre : ${randomNumber}`;
+                    messageElement.className = "message result";
+                } else if (userGuess < randomNumber) {
+                    messageElement.textContent = "C'est trop bas ! Essayez un nombre plus grand.";
+                    messageElement.className = "message";
+                } else {
+                    messageElement.textContent = "C'est trop haut ! Essayez un nombre plus petit.";
+                    messageElement.className = "message";
+                }
+            };
+        });
+    </script>
+</body>
+</html>
