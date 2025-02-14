@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(9, 40px);
+            grid-template-rows: repeat(9, 40px);
+            gap: 2px;
+            border: 3px solid white;
+            padding: 5px;
+            background: white;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 1.2em;
+            border: 1px solid black;
+            background: #ecf0f1;
+        }
+        .cell:focus {
+            outline: none;
+            background: #dfe6e9;
+        }
+        .filled {
+            background: #bdc3c7;
+            pointer-events: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sudoku</h1>
+    <div class="grid" id="sudoku-grid"></div>
+    <button onclick="checkSudoku()">Vérifier</button>
+    <script>
+        const grid = document.getElementById("sudoku-grid");
+        const puzzle = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+
+        function createGrid() {
+            grid.innerHTML = "";
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    let cell = document.createElement("input");
+                    cell.type = "text";
+                    cell.maxLength = 1;
+                    cell.classList.add("cell");
+                    if (puzzle[row][col] !== 0) {
+                        cell.value = puzzle[row][col];
+                        cell.classList.add("filled");
+                    } else {
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        cell.addEventListener("input", validateInput);
+                    }
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function validateInput(event) {
+            const value = event.target.value;
+            if (!/^[1-9]$/.test(value)) {
+                event.target.value = "";
+            }
+        }
+
+        function checkSudoku() {
+            const cells = document.querySelectorAll(".cell:not(.filled)");
+            let correct = true;
+            
+            cells.forEach(cell => {
+                if (cell.value === "") {
+                    correct = false;
+                }
+            });
+            
+            alert(correct ? "Bravo ! Sudoku complété !" : "Il reste des erreurs ou des cases vides.");
+        }
+
+        createGrid();
+    </script>
+</body>
+</html>
