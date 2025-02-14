@@ -9,10 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Ajout de l'animation d'agrandissement au bouton actif
             button.classList.add('clicked');
 
-            // Afficher une alerte ou toute autre action
-            alert(`Vous allez commencer le ${gameName}. Bonne chance !`);
-
-            // Simuler une transition fluide vers une autre page après l'alerte
+            // Simuler une transition fluide vers une autre page
             setTimeout(() => {
                 window.location.href = event.target.href;
             }, 1000); // Attente de 1 seconde avant de rediriger
@@ -30,4 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
             button.style.transform = 'scale(1)';
         });
     });
+
+    // Fonction pour changer les couleurs de fond
+    let colorIndex = 0;
+    const colors = [
+        '#ff7e5f', '#feb47b', '#6a11cb', '#2575fc', '#8e2de2', '#4facfe', '#ff6a00'
+    ];
+
+    setInterval(() => {
+        document.body.style.background = `linear-gradient(135deg, ${colors[colorIndex]}, #fff)`;
+        colorIndex = (colorIndex + 1) % colors.length;
+    }, 5000); // Change toutes les 5 secondes
 });
