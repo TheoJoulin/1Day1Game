@@ -73,15 +73,21 @@
             color: red;
         }
 
-        a {
+        .link-button {
             margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 1.2rem;
             text-decoration: none;
-            color: #0073e6;
+            text-align: center;
         }
 
-        a:hover {
-            color: #005bb5;
+        .link-button:hover {
+            background-color: #e64a19;
         }
     </style>
 </head>
@@ -92,9 +98,10 @@
         <input type="number" id="guess" placeholder="Entrez votre nombre" min="1" max="100">
         <button onclick="checkGuess()">Vérifier</button>
         <p class="message" id="message"></p>
+        
+        <!-- Lien vers la page Démineur -->
+        <a href="demineur.html" class="link-button">Jouer au Démineur</a>
     </div>
-
-    <a href="cookie-clicker.html">Jouer à Cookie Clicker</a>
 
     <script>
         // Générer un nombre aléatoire entre 1 et 100
