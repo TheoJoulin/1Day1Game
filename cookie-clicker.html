@@ -24,7 +24,7 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 350px;
             text-align: center;
         }
 
@@ -59,6 +59,15 @@
             color: #333;
         }
 
+        .upgrade-button {
+            margin-top: 20px;
+            background-color: #4CAF50;
+        }
+
+        .upgrade-button:hover {
+            background-color: #45a049;
+        }
+
         a {
             margin-top: 20px;
             font-size: 1.2rem;
@@ -78,29 +87,63 @@
         <button id="cookieButton">Cliquez ici !</button>
         <p class="score">Cookies : <span id="cookieCount">0</span></p>
         <p class="message" id="message"></p>
+
+        <!-- Section des améliorations -->
+        <h2>Améliorations</h2>
+        <button class="upgrade-button" id="buyAutoclicker" disabled>Acheter un Autoclicker (Coût: 50 cookies)</button>
+        <p id="autoclickerStatus">Autoclicker : Non acheté</p>
+
         <a href="index.html">Retour au jeu précédent</a>
     </div>
 
     <script>
-        // Initialiser la variable pour les cookies
-        let cookies = 0;
+        let cookies = 0;                // Nombre de cookies
+        let autoclickerCost = 50;       // Coût de l'autoclicker
+        let autoclickerEnabled = false; // Si l'autoclicker est activé
 
-        // Sélectionner le bouton et la zone de texte pour afficher les cookies
+        // Sélectionner les éléments du DOM
         const cookieButton = document.getElementById("cookieButton");
         const cookieCountElement = document.getElementById("cookieCount");
+        const buyAutoclickerButton = document.getElementById("buyAutoclicker");
+        const autoclickerStatus = document.getElementById("autoclickerStatus");
 
         // Fonction pour augmenter le nombre de cookies
         cookieButton.addEventListener("click", function() {
             cookies++;
             cookieCountElement.textContent = cookies;
+            updateAutoclickerStatus();
+        });
 
-            // Afficher un message après avoir cliqué 10 fois
-            if (cookies === 10) {
-                document.getElementById("message").textContent = "Vous avez atteint 10 cookies !";
-            } else if (cookies === 50) {
-                document.getElementById("message").textContent = "Félicitations ! Vous avez atteint 50 cookies !";
+        // Fonction pour acheter l'autoclicker
+        buyAutoclickerButton.addEventListener("click", function() {
+            if (cookies >= autoclickerCost) {
+                cookies -= autoclickerCost;
+                autoclickerEnabled = true;
+                cookieCountElement.textContent = cookies;
+                autoclickerStatus.textContent = "Autoclicker : Activé";
+                buyAutoclickerButton.disabled = true;
+                startAutoclicker();
+            } else {
+                alert("Vous n'avez pas assez de cookies pour acheter l'autoclicker.");
             }
         });
+
+        // Mise à jour de l'état du bouton d'achat de l'autoclicker
+        function updateAutoclickerStatus() {
+            if (cookies >= autoclickerCost && !autoclickerEnabled) {
+                buyAutoclickerButton.disabled = false;
+            }
+        }
+
+        // Fonction d'autoclicker pour ajouter des cookies toutes les secondes
+        function startAutoclicker() {
+            setInterval(function() {
+                if (autoclickerEnabled) {
+                    cookies++;
+                    cookieCountElement.textContent = cookies;
+                }
+            }, 1000); // Ajoute 1 cookie chaque seconde
+        }
     </script>
 </body>
 </html>
