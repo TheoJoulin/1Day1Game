@@ -35,6 +35,12 @@
         .error {
             color: red;
         }
+        .highlight {
+            background-color: #ffff99 !important;
+        }
+        .bold-border {
+            border: 2px solid white !important;
+        }
         button {
             margin-top: 10px;
             padding: 10px;
@@ -95,9 +101,18 @@
                     } else {
                         cell.addEventListener("input", (event) => checkInput(event, board));
                     }
+                    cell.addEventListener("focus", () => highlightCell(i, j));
                     grid.appendChild(cell);
+
+                    if (j % 3 === 2) cell.classList.add("bold-border");
+                    if (i % 3 === 2) cell.classList.add("bold-border");
                 }
             }
+        }
+
+        function highlightCell(row, col) {
+            document.querySelectorAll(".cell").forEach(cell => cell.classList.remove("highlight"));
+            document.querySelectorAll(`.cell[data-row='${row}'], .cell[data-col='${col}']`).forEach(cell => cell.classList.add("highlight"));
         }
 
         function checkInput(event, board) {
