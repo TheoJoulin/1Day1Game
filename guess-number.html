@@ -16,6 +16,7 @@
             height: 100vh;
             color: #333;
             flex-direction: column;
+            transition: background 5s ease;
         }
 
         .game-container {
@@ -51,10 +52,12 @@
             cursor: pointer;
             font-size: 1.1rem;
             margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
             background-color: #005bb5;
+            transform: scale(1.05);
         }
 
         .message {
@@ -83,10 +86,20 @@
             font-size: 1.2rem;
             text-decoration: none;
             display: inline-block;
+            transition: background-color 0.3s ease;
         }
 
         .back-button:hover {
             background-color: #e64a19;
+        }
+
+        /* Ajout de l'animation de changement de couleurs */
+        @keyframes changeBackground {
+            0% { background-color: #ff7e5f; }
+            25% { background-color: #feb47b; }
+            50% { background-color: #6a11cb; }
+            75% { background-color: #2575fc; }
+            100% { background-color: #8e2de2; }
         }
     </style>
 </head>
@@ -126,6 +139,17 @@
                     messageElement.className = "message";
                 }
             };
+
+            // Animation pour changer la couleur de fond toutes les 5 secondes
+            let colorIndex = 0;
+            const colors = [
+                '#ff7e5f', '#feb47b', '#6a11cb', '#2575fc', '#8e2de2', '#4facfe', '#ff6a00'
+            ];
+
+            setInterval(() => {
+                document.body.style.background = `linear-gradient(135deg, ${colors[colorIndex]}, #fff)`;
+                colorIndex = (colorIndex + 1) % colors.length;
+            }, 5000); // Change toutes les 5 secondes
         });
     </script>
 </body>
