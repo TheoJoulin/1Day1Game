@@ -28,11 +28,22 @@
             color: #000;
             font-size: 1.5rem;
         }
+
+        .high-score-board {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #000;
+            font-size: 1.5rem;
+        }
     </style>
 </head>
 <body>
     <div class="score-board">
         Score : <span id="score">0</span>
+    </div>
+    <div class="high-score-board">
+        High Score : <span id="highScore">0</span>
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
@@ -43,11 +54,19 @@
         const box = 20;
         const canvasSize = canvas.width;
         let score = 0;
-
+        let highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
+        let speed = 100;
         let snake = [{ x: 5 * box, y: 5 * box }];
         let direction = "RIGHT";
         let food = generateFood();
 
+        // Mettre à jour les scores
+        function updateScores() {
+            document.getElementById("score").textContent = score;
+            document.getElementById("highScore").textContent = highScore;
+        }
+
+        // Dessiner le jeu
         function draw() {
             ctx.clearRect(0, 0, canvasSize, canvasSize);
 
@@ -55,6 +74,8 @@
             for (let i = 0; i < snake.length; i++) {
                 ctx.fillStyle = i === 0 ? "green" : "white";
                 ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                ctx.strokeStyle = "black";
+                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
             }
 
             // Afficher la nourriture
@@ -77,6 +98,9 @@
             // Vérifier si le serpent a mangé la nourriture
             if (snakeX === food.x && snakeY === food.y) {
                 score++;
+                if (score % 5 === 0 && speed > 50) {
+                    speed -= 10; // Augmenter la vitesse toutes les 5 nourritures mangées
+                }
                 document.getElementById("score").textContent = score;
                 food = generateFood();
             } else {
@@ -88,17 +112,18 @@
                 return gameOver();
             }
 
-            setTimeout(draw, 100); // Met à jour le jeu toutes les 100 ms
+            setTimeout(draw, speed); // Met à jour le jeu toutes les "speed" millisecondes
         }
 
+        // Générer la nourriture à un endroit aléatoire
         function generateFood() {
             let foodX = Math.floor(Math.random() * (canvasSize / box)) * box;
             let foodY = Math.floor(Math.random() * (canvasSize / box)) * box;
             return { x: foodX, y: foodY };
         }
 
+        // Vérifier si le serpent se mord
         function collision(x, y) {
-            // Vérifier si le serpent se mord
             for (let i = 1; i < snake.length; i++) {
                 if (snake[i].x === x && snake[i].y === y) {
                     return true;
@@ -107,12 +132,19 @@
             return false;
         }
 
+        // Gestion de la fin du jeu
         function gameOver() {
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('highScore', highScore); // Sauvegarder le high score
+            }
+            updateScores();
             alert("Game Over! Score final: " + score);
             snake = [{ x: 5 * box, y: 5 * box }];
             direction = "RIGHT";
             score = 0;
-            document.getElementById("score").textContent = score;
+            updateScores();
+            draw();
         }
 
         // Gérer les contrôles
