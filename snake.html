@@ -56,6 +56,11 @@
             font-size: 2rem;
             font-weight: bold;
             display: none;
+            text-align: center;
+        }
+
+        .game-over-message span {
+            display: block; /* Pour forcer le retour à la ligne */
         }
     </style>
 </head>
@@ -70,7 +75,8 @@
         Appuyez sur Entrée pour démarrer
     </div>
     <div class="game-over-message" id="gameOverMessage">
-        Game Over! Appuyez sur Entrée pour recommencer.
+        <span>GAME OVER !</span>
+        <span>Appuyez sur Entrée pour recommencer.</span>
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
