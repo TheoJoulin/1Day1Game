@@ -136,6 +136,7 @@
                     speed -= 10; // Augmenter la vitesse toutes les 5 nourritures mangées
                 }
                 food = generateFood();
+                updateScores(); // Mettre à jour le score après avoir mangé
             } else {
                 snake.pop(); // Enlever la dernière case du serpent
             }
