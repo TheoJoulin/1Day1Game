@@ -4,23 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Démineur</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: #ddd;
+            border: 1px solid #aaa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cell.opened {
+            background-color: #f4f4f4;
+            cursor: default;
+        }
+
+        .mine {
+            background-color: red;
+        }
+
+        .flag {
+            background-color: yellow;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .restart, .home {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .restart:hover, .home:hover {
+            background-color: #45a049;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 <body>
 
 <h1>Démineur</h1>
-<div id="gameMessage" class="message">Bonne chance !</div>
-
-<div class="game-info">
-    <p id="mineCount">Mines restantes: 20</p>
-    <p id="timer">Temps: 0s</p>
+<div class="top-bar">
+    <div class="timer" id="timer">Temps : 0s</div>
+    <div class="message" id="gameMessage">Bonne chance !</div>
 </div>
 
 <div class="board" id="gameBoard"></div>
 
-<button class="restart" onclick="startGame()">Redémarrer le jeu</button>
-<a href="index.html" class="home-button">Retour à l'Accueil</a>
+<div class="top-bar">
+    <div class="mines" id="minesLeft">Mines restantes : 20</div>
+    <button class="home" onclick="goHome()">Retour à l'accueil</button>
+</div>
 
-<script src="demineur.js"></script>
+<div class="top-bar">
+    <button class="restart" onclick="startGame()">Redémarrer le jeu</button>
+</div>
+
+<script>
+    const boardSize = 10;
+    const mineCount = 20;
+    let board = [];
+    let gameOver = false;
+    let timer = 0;
+    let timerInterval;
+
+    // Initialisation du jeu
+    function startGame() {
+        board = [];
+        gameOver = false;
+        document.getElementById("gameMessage").textContent = "Bonne chance !";
+        document.getElementById("minesLeft").textContent = `Mines restantes : ${mineCount}`;
+        const boardElement = document.getElementById("gameBoard");
+        boardElement.innerHTML = ''; // Réinitialiser le tableau
+
+        // Créer la grille de jeu
+        for (let i = 0; i < boardSize; i++) {
+            const row = [];
+            for (let j = 0; j < boardSize; j++) {
+                row.push({ isMine: false, opened: false, flagged: false, surroundingMines: 0 });
+            }
+            board.push(row);
+        }
+
+        // Placer les mines aléatoirement
+        for (let i = 0; i < mineCount; i++) {
+            let x, y;
+            do {
+                x = Math.floor(Math.random() * boardSize);
+                y = Math.floor(Math.random() * boardSize);
+            } while (board[x][y].isMine);
+            board[x][y].isMine = true;
+        }
+
+        // Calculer les mines adjacentes
+        for (let x = 0; x < boardSize; x++) {
+            for (let y = 0; y < boardSize; y++) {
+                if (!board[x][y].isMine) {
+                    let surroundingMines = 0;
+                    for (let dx = -1; dx <= 1; dx++) {
+                        for (let dy = -1; dy <= 1; dy++) {
+                            if (x + dx >= 0 && x + dx < boardSize && y + dy >= 0 && y + dy < boardSize) {
+                                if (board[x + dx][y + dy].isMine) {
+                                    surroundingMines++;
+                                }
+                            }
+                        }
+                    }
+                    board[x][y].surroundingMines = surroundingMines;
+                }
+            }
+        }
+
+        // Créer les cellules de la grille
+        for (let x = 0; x < boardSize; x++) {
+            for (let y = 0; y < boardSize; y++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.dataset.x = x;
+                cell.dataset.y = y;
+                cell.addEventListener("click", () => openCell(x, y));
+                cell.addEventListener("contextmenu", (e) => {
+                    e.preventDefault();
+                    toggleFlag(x, y);
+                });
+                boardElement.appendChild(cell);
+            }
+        }
+
+        // Reset timer
+        timer = 0;
+        document.getElementById("timer").textContent = `Temps : ${timer}s`;
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    // Ouvrir une cellule
+    function openCell(x, y) {
+        if (gameOver || board[x][y].opened || board[x][y].flagged) return;
+
+        const cell = document.querySelector(`.cell[data-x='${x}'][data-y='${y}']`);
+        board[x][y].opened = true;
+
+        if (board[x][y].isMine) {
+            cell.classList.add("mine");
+            document.getElementById("gameMessage").textContent = "Game Over ! Vous avez touché une mine.";
+            gameOver = true;
+            clearInterval(timerInterval);
+            return;
+        }
+
+        cell.classList.add("opened");
+        if (board[x][y].surroundingMines > 0) {
+            cell.textContent = board[x][y].surroundingMines;
+        } else {
+            // Ouvrir les cases adjacentes si aucune mine autour
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    const nx = x + dx;
+                    const ny = y + dy;
+                    if (nx >= 0 && nx < boardSize && ny >= 0 && ny < boardSize && !board[nx][ny].opened) {
+                        openCell(nx, ny);
+                    }
+                }
+            }
+        }
+
+        checkWin();
+    }
+
+    // Marquer ou retirer un flag
+    function toggleFlag(x, y) {
+        if (gameOver || board[x][y].opened) return;
+
+        const cell = document.querySelector(`.cell[data-x='${x}'][data-y='${y}']`);
+        if (board[x][y].flagged) {
+            board[x][y].flagged = false;
+            cell.classList.remove("flag");
+        } else {
+            board[x][y].flagged = true;
+            cell.classList.add("flag");
+        }
+
+        // Update remaining mines
+        const flaggedMines = board.flat().filter(cell => cell.flagged).length;
+        document.getElementById("minesLeft").textContent = `Mines restantes : ${mineCount - flaggedMines}`;
+    }
+
+    // Vérifier si le joueur a gagné
+    function checkWin() {
+        let won = true;
+        for (let x = 0; x < boardSize; x++) {
+            for (let y = 0; y < boardSize; y++) {
+                if ((!board[x][y].isMine && !board[x][y].opened) || (board[x][y].isMine && !board[x][y].flagged)) {
+                    won = false;
+                }
+            }
+        }
+        if (won) {
+            document.getElementById("gameMessage").textContent = "Félicitations ! Vous avez gagné.";
+            gameOver = true;
+            clearInterval(timerInterval);
+        }
+    }
+
+    // Mettre à jour le timer
+    function updateTimer() {
+        if (!gameOver) {
+            timer++;
+            document.getElementById("timer").textContent = `Temps : ${timer}s`;
+        }
+    }
+
+    // Retour à l'accueil
+    function goHome() {
+        // Rediriger ou effectuer l'action souhaitée pour revenir à l'accueil
+        alert("Retour à l'accueil (fonctionnalité à implémenter)");
+    }
+
+    // Lancer le jeu
+    startGame();
+</script>
+
 </body>
 </html>
