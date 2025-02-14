@@ -140,4 +140,37 @@ footer p {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.4s ease;
 }
+/* Ajouter un conteneur pour les infos du jeu */
+.game-info {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+/* Style pour le bouton Retour à l'Accueil */
+.home-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour le chronomètre */
+#timer {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Style pour le nombre de mines restantes */
+#mineCount {
+    font-size: 1.2rem;
+    color: #333;
+}
 
