@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Clicker</title>
+    <title>Cookie Clicker - Fun Edition</title>
     <style>
-        /* Style général */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -17,6 +16,7 @@
             height: 100vh;
             color: #333;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .game-container {
@@ -42,10 +42,12 @@
             cursor: pointer;
             font-size: 1.1rem;
             margin-top: 20px;
+            transition: transform 0.2s;
         }
 
         button:hover {
             background-color: #f57c00;
+            transform: scale(1.1);
         }
 
         .score {
@@ -68,53 +70,82 @@
             background-color: #45a049;
         }
 
-        a {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            color: #0073e6;
+        .special-upgrade {
+            background-color: #ff4081;
+            color: white;
         }
 
-        a:hover {
-            color: #005bb5;
+        .special-upgrade:hover {
+            background-color: #f50057;
+        }
+
+        .explosion {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 165, 0, 0.8);
+            border-radius: 50%;
+            animation: explosion 0.5s forwards;
+        }
+
+        @keyframes explosion {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="game-container">
-        <h1>Cookie Clicker</h1>
+        <h1>Cookie Clicker - Fun Edition</h1>
         <p>Cliquez sur le cookie pour obtenir des cookies !</p>
         <button id="cookieButton">Cliquez ici !</button>
         <p class="score">Cookies : <span id="cookieCount">0</span></p>
         <p class="message" id="message"></p>
 
-        <!-- Section des améliorations -->
         <h2>Améliorations</h2>
         <button class="upgrade-button" id="buyAutoclicker" disabled>Acheter un Autoclicker (Coût: 50 cookies)</button>
         <p id="autoclickerStatus">Autoclicker : Non acheté</p>
+
+        <button class="special-upgrade" id="buySuperAutoclicker" disabled>Acheter un Super Autoclicker (Coût: 200 cookies)</button>
+        <p id="superAutoclickerStatus">Super Autoclicker : Non acheté</p>
 
         <a href="index.html">Retour au jeu précédent</a>
     </div>
 
     <script>
-        let cookies = 0;                // Nombre de cookies
-        let autoclickerCost = 50;       // Coût de l'autoclicker
-        let autoclickerEnabled = false; // Si l'autoclicker est activé
-
+        let cookies = 0;
+        let autoclickerCost = 50;
+        let superAutoclickerCost = 200;
+        let autoclickerEnabled = false;
+        let superAutoclickerEnabled = false;
+        
         // Sélectionner les éléments du DOM
         const cookieButton = document.getElementById("cookieButton");
         const cookieCountElement = document.getElementById("cookieCount");
         const buyAutoclickerButton = document.getElementById("buyAutoclicker");
+        const buySuperAutoclickerButton = document.getElementById("buySuperAutoclicker");
         const autoclickerStatus = document.getElementById("autoclickerStatus");
+        const superAutoclickerStatus = document.getElementById("superAutoclickerStatus");
 
-        // Fonction pour augmenter le nombre de cookies
+        // Fonction pour augmenter les cookies
         cookieButton.addEventListener("click", function() {
             cookies++;
             cookieCountElement.textContent = cookies;
-            updateAutoclickerStatus();
+            generateExplosion();
+            updateUpgradeStatus();
         });
 
-        // Fonction pour acheter l'autoclicker
+        // Fonction pour acheter un autoclicker
         buyAutoclickerButton.addEventListener("click", function() {
             if (cookies >= autoclickerCost) {
                 cookies -= autoclickerCost;
@@ -128,21 +159,58 @@
             }
         });
 
-        // Mise à jour de l'état du bouton d'achat de l'autoclicker
-        function updateAutoclickerStatus() {
+        // Fonction pour acheter un super autoclicker
+        buySuperAutoclickerButton.addEventListener("click", function() {
+            if (cookies >= superAutoclickerCost) {
+                cookies -= superAutoclickerCost;
+                superAutoclickerEnabled = true;
+                cookieCountElement.textContent = cookies;
+                superAutoclickerStatus.textContent = "Super Autoclicker : Activé";
+                buySuperAutoclickerButton.disabled = true;
+                startSuperAutoclicker();
+            } else {
+                alert("Vous n'avez pas assez de cookies pour acheter le super autoclicker.");
+            }
+        });
+
+        // Mise à jour de l'état des améliorations
+        function updateUpgradeStatus() {
             if (cookies >= autoclickerCost && !autoclickerEnabled) {
                 buyAutoclickerButton.disabled = false;
             }
+            if (cookies >= superAutoclickerCost && !superAutoclickerEnabled) {
+                buySuperAutoclickerButton.disabled = false;
+            }
         }
 
-        // Fonction d'autoclicker pour ajouter des cookies toutes les secondes
+        // Fonction d'autoclicker
         function startAutoclicker() {
             setInterval(function() {
                 if (autoclickerEnabled) {
                     cookies++;
                     cookieCountElement.textContent = cookies;
                 }
-            }, 1000); // Ajoute 1 cookie chaque seconde
+            }, 1000);
+        }
+
+        // Fonction de super autoclicker
+        function startSuperAutoclicker() {
+            setInterval(function() {
+                if (superAutoclickerEnabled) {
+                    cookies += 2; // Super autoclicker ajoute 2 cookies à chaque fois
+                    cookieCountElement.textContent = cookies;
+                }
+            }, 500);
+        }
+
+        // Générer une animation d'explosion à chaque clic
+        function generateExplosion() {
+            const explosion = document.createElement("div");
+            explosion.classList.add("explosion");
+            document.body.appendChild(explosion);
+            setTimeout(function() {
+                explosion.remove();
+            }, 500);
         }
     </script>
 </body>
