@@ -11,14 +11,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #2f2f2f;
             margin: 0;
             overflow: hidden;
         }
 
         canvas {
             border: 5px solid #000;
-            background-color: #2f2f2f;
+            background-color: #1f1f1f;
         }
 
         .score-board {
@@ -67,10 +67,10 @@
         High Score : <span id="highScore">0</span>
     </div>
     <div class="start-message" id="startMessage">
-        Appuyez sur une touche pour démarrer
+        Appuyez sur Entrée pour démarrer
     </div>
     <div class="game-over-message" id="gameOverMessage">
-        Game Over! Appuyez sur R pour recommencer.
+        Game Over! Appuyez sur Entrée pour recommencer.
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
@@ -99,9 +99,10 @@
         function draw() {
             ctx.clearRect(0, 0, canvasSize, canvasSize);
 
-            // Afficher le serpent
+            // Afficher le serpent avec couleurs dynamiques
             for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = i === 0 ? "green" : "lightgreen"; // Serpent plus clair sauf pour la tête
+                const color = i === 0 ? randomColor() : "lightgreen"; // Serpent plus clair sauf pour la tête
+                ctx.fillStyle = color;
                 ctx.fillRect(snake[i].x, snake[i].y, box, box);
                 ctx.strokeStyle = "black"; // Bordures
                 ctx.lineWidth = 2;
@@ -180,10 +181,12 @@
 
         function directionControl(event) {
             if (!gameStarted && !gameOver) {
-                // Commencer le jeu si une touche est pressée
-                gameStarted = true;
-                document.getElementById("startMessage").style.display = "none"; // Masquer le message de démarrage
-                draw();
+                // Commencer le jeu si la touche Entrée est pressée
+                if (event.key === "Enter") {
+                    gameStarted = true;
+                    document.getElementById("startMessage").style.display = "none"; // Masquer le message de démarrage
+                    draw();
+                }
             }
 
             if (event.keyCode === 37 && direction !== "RIGHT") direction = "LEFT";
@@ -191,8 +194,8 @@
             if (event.keyCode === 39 && direction !== "LEFT") direction = "RIGHT";
             if (event.keyCode === 40 && direction !== "UP") direction = "DOWN";
 
-            // Recommencer le jeu si le joueur appuie sur 'R'
-            if (gameOver && event.keyCode === 82) {
+            // Recommencer le jeu si le joueur appuie sur 'Entrée' après Game Over
+            if (gameOver && event.key === "Enter") {
                 gameOver = false;
                 snake = [{ x: 5 * box, y: 5 * box }];
                 direction = "RIGHT";
@@ -201,6 +204,16 @@
                 document.getElementById("gameOverMessage").style.display = "none";
                 draw();
             }
+        }
+
+        // Fonction pour générer une couleur aléatoire
+        function randomColor() {
+            const letters = "0123456789ABCDEF";
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
 
         // Démarrer le jeu
