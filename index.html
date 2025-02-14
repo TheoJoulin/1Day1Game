@@ -3,10 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon site</title>
+    <title>Blog IoT</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1, h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        header {
+            background: #0073e6;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        /* Navigation */
+        nav {
+            background: #005bb5;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        /* Container principal */
+        .container {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* Section des posts */
+        .post {
+            border-bottom: 1px solid #ddd;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        .post h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .post p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Section À propos et Contact */
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #0073e6;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav a {
+                font-size: 1rem;
+                margin: 0 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur mon site !</h1>
-    <p>Accédez à mon Home Assistant <a href="https://mon-domaine.ovh">ici</a>.</p>
+    <header>
+        <h1>Bienvenue sur mon blog IoT</h1>
+    </header>
+    <nav>
+        <a href="#">Accueil</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="container">
+        <section id="posts">
+            <div class="post">
+                <h2>Qu'est-ce que l'IoT ?</h2>
+                <p>L'Internet des objets (IoT) est un réseau d'objets connectés qui communiquent entre eux...</p>
+            </div>
+            <div class="post">
+                <h2>Les meilleurs capteurs IoT en 2025</h2>
+                <p>Découvrez les capteurs incontournables pour vos projets IoT...</p>
+            </div>
+        </section>
+        <section id="about">
+            <h2>À propos</h2>
+            <p>Ce blog est dédié aux passionnés de l'Internet des objets et aux makers.</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Envoyez-moi un email à <a href="mailto:contact@mon-domaine.ovh">contact@mon-domaine.ovh</a>.</p>
+        </section>
+    </div>
+    <footer>
+        &copy; 2025 Mon Blog IoT - Tous droits réservés.
+    </footer>
 </body>
 </html>
