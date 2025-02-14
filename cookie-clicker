@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            flex-direction: column;
+        }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ff9800;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #f57c00;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        a {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #0073e6;
+        }
+
+        a:hover {
+            color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Cookie Clicker</h1>
+        <p>Cliquez sur le cookie pour obtenir des cookies !</p>
+        <button id="cookieButton">Cliquez ici !</button>
+        <p class="score">Cookies : <span id="cookieCount">0</span></p>
+        <p class="message" id="message"></p>
+        <a href="index.html">Retour au jeu précédent</a>
+    </div>
+
+    <script>
+        // Initialiser la variable pour les cookies
+        let cookies = 0;
+
+        // Sélectionner le bouton et la zone de texte pour afficher les cookies
+        const cookieButton = document.getElementById("cookieButton");
+        const cookieCountElement = document.getElementById("cookieCount");
+
+        // Fonction pour augmenter le nombre de cookies
+        cookieButton.addEventListener("click", function() {
+            cookies++;
+            cookieCountElement.textContent = cookies;
+
+            // Afficher un message après avoir cliqué 10 fois
+            if (cookies === 10) {
+                document.getElementById("message").textContent = "Vous avez atteint 10 cookies !";
+            } else if (cookies === 50) {
+                document.getElementById("message").textContent = "Félicitations ! Vous avez atteint 50 cookies !";
+            }
+        });
+    </script>
+</body>
+</html>
