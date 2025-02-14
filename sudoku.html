@@ -11,110 +11,168 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #2c3e50;
+            background-color: #1e1e1e;
             color: white;
             font-family: Arial, sans-serif;
         }
-        .grid {
+        .sudoku-grid {
             display: grid;
             grid-template-columns: repeat(9, 40px);
             grid-template-rows: repeat(9, 40px);
             gap: 2px;
-            border: 3px solid white;
+            background-color: #000;
             padding: 5px;
-            background: white;
         }
         .cell {
             width: 40px;
             height: 40px;
             text-align: center;
-            font-size: 1.2em;
-            border: 1px solid black;
-            background: #ecf0f1;
+            font-size: 20px;
+            border: 1px solid #999;
+            background-color: white;
+            color: black;
         }
-        .cell:focus {
-            outline: none;
-            background: #dfe6e9;
-        }
-        .filled {
-            background: #bdc3c7;
-            pointer-events: none;
+        .error {
+            color: red;
         }
         button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            background: #e74c3c;
-            color: white;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
         }
-        button:hover {
-            background: #c0392b;
+        #timer, #errors {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Sudoku</h1>
-    <div class="grid" id="sudoku-grid"></div>
-    <button onclick="checkSudoku()">Vérifier</button>
-    <script>
-        const grid = document.getElementById("sudoku-grid");
-        const puzzle = [
-            [5, 3, 0, 0, 7, 0, 0, 0, 0],
-            [6, 0, 0, 1, 9, 5, 0, 0, 0],
-            [0, 9, 8, 0, 0, 0, 0, 6, 0],
-            [8, 0, 0, 0, 6, 0, 0, 0, 3],
-            [4, 0, 0, 8, 0, 3, 0, 0, 1],
-            [7, 0, 0, 0, 2, 0, 0, 0, 6],
-            [0, 6, 0, 0, 0, 0, 2, 8, 0],
-            [0, 0, 0, 4, 1, 9, 0, 0, 5],
-            [0, 0, 0, 0, 8, 0, 0, 7, 9]
-        ];
+    <div id="timer">Temps : 0s</div>
+    <div id="errors">Erreurs : 0/3</div>
+    <div class="sudoku-grid" id="grid"></div>
+    <button onclick="generateSudoku()">Nouvelle Partie</button>
+    <button onclick="window.location.href='index.html'">Retour Accueil</button>
 
-        function createGrid() {
+    <script>
+        let timer;
+        let time = 0;
+        let errors = 0;
+        
+        function startTimer() {
+            clearInterval(timer);
+            time = 0;
+            document.getElementById("timer").textContent = `Temps : 0s`;
+            timer = setInterval(() => {
+                time++;
+                document.getElementById("timer").textContent = `Temps : ${time}s`;
+            }, 1000);
+        }
+
+        function generateSudoku() {
+            clearInterval(timer);
+            startTimer();
+            errors = 0;
+            document.getElementById("errors").textContent = "Erreurs : 0/3";
+            
+            const grid = document.getElementById("grid");
             grid.innerHTML = "";
-            for (let row = 0; row < 9; row++) {
-                for (let col = 0; col < 9; col++) {
-                    let cell = document.createElement("input");
+            const board = generateRandomSudoku();
+            
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.createElement("input");
                     cell.type = "text";
+                    cell.className = "cell";
                     cell.maxLength = 1;
-                    cell.classList.add("cell");
-                    if (puzzle[row][col] !== 0) {
-                        cell.value = puzzle[row][col];
-                        cell.classList.add("filled");
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    
+                    if (board[i][j] !== 0) {
+                        cell.value = board[i][j];
+                        cell.readOnly = true;
+                        cell.style.backgroundColor = "#ccc";
                     } else {
-                        cell.dataset.row = row;
-                        cell.dataset.col = col;
-                        cell.addEventListener("input", validateInput);
+                        cell.addEventListener("input", (event) => checkInput(event, board));
                     }
                     grid.appendChild(cell);
                 }
             }
         }
 
-        function validateInput(event) {
-            const value = event.target.value;
-            if (!/^[1-9]$/.test(value)) {
-                event.target.value = "";
+        function checkInput(event, board) {
+            const cell = event.target;
+            const row = cell.dataset.row;
+            const col = cell.dataset.col;
+            const value = parseInt(cell.value, 10);
+            
+            if (isNaN(value) || value < 1 || value > 9 || value !== board[row][col]) {
+                cell.classList.add("error");
+                errors++;
+                document.getElementById("errors").textContent = `Erreurs : ${errors}/3`;
+                
+                if (errors >= 3) {
+                    clearInterval(timer);
+                    alert("Game Over! Vous avez fait trop d'erreurs.");
+                    generateSudoku();
+                }
+            } else {
+                cell.classList.remove("error");
             }
         }
 
-        function checkSudoku() {
-            const cells = document.querySelectorAll(".cell:not(.filled)");
-            let correct = true;
-            
-            cells.forEach(cell => {
-                if (cell.value === "") {
-                    correct = false;
-                }
-            });
-            
-            alert(correct ? "Bravo ! Sudoku complété !" : "Il reste des erreurs ou des cases vides.");
+        function generateRandomSudoku() {
+            let board = Array.from({ length: 9 }, () => Array(9).fill(0));
+            fillSudoku(board);
+            removeNumbers(board);
+            return board;
         }
 
-        createGrid();
+        function fillSudoku(board) {
+            function isValid(num, row, col) {
+                for (let i = 0; i < 9; i++) {
+                    if (board[row][i] === num || board[i][col] === num) return false;
+                    let boxRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+                    let boxCol = 3 * Math.floor(col / 3) + (i % 3);
+                    if (board[boxRow][boxCol] === num) return false;
+                }
+                return true;
+            }
+            
+            function solve() {
+                for (let row = 0; row < 9; row++) {
+                    for (let col = 0; col < 9; col++) {
+                        if (board[row][col] === 0) {
+                            let numbers = [...Array(9).keys()].map(n => n + 1).sort(() => Math.random() - 0.5);
+                            for (let num of numbers) {
+                                if (isValid(num, row, col)) {
+                                    board[row][col] = num;
+                                    if (solve()) return true;
+                                    board[row][col] = 0;
+                                }
+                            }
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            solve();
+        }
+
+        function removeNumbers(board) {
+            let attempts = 40; 
+            while (attempts > 0) {
+                let row = Math.floor(Math.random() * 9);
+                let col = Math.floor(Math.random() * 9);
+                if (board[row][col] !== 0) {
+                    board[row][col] = 0;
+                    attempts--;
+                }
+            }
+        }
+
+        generateSudoku();
     </script>
 </body>
 </html>
