@@ -25,6 +25,7 @@
             color: white;
             padding: 30px 0;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
@@ -56,7 +57,7 @@
         /* Container principal */
         .container {
             padding: 40px 20px;
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
         }
 
@@ -76,6 +77,16 @@
             font-size: 1rem;
             color: #555;
             line-height: 1.6;
+        }
+
+        .post a {
+            color: #0073e6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
         }
 
         /* Section À propos et Contact */
@@ -133,34 +144,49 @@
 <body>
     <header>
         <h1>Bienvenue sur mon blog IoT</h1>
+        <p>Exploration de l'Internet des Objets et des projets IoT innovants</p>
     </header>
     <nav>
         <a href="#">Accueil</a>
         <a href="#about">À propos</a>
+        <a href="#posts">Blog</a>
         <a href="#contact">Contact</a>
     </nav>
     <div class="container">
         <section id="posts">
+            <h2>Derniers articles</h2>
             <div class="post">
                 <h2>Qu'est-ce que l'IoT ?</h2>
-                <p>L'Internet des objets (IoT) est un réseau d'objets connectés qui communiquent entre eux...</p>
+                <p>L'Internet des objets (IoT) est un réseau d'objets connectés qui communiquent entre eux, permettant la collecte de données et l'automatisation des tâches. Ces objets peuvent être des capteurs, des appareils intelligents, ou même des machines industrielles.</p>
+                <a href="#">Lire la suite</a>
             </div>
             <div class="post">
                 <h2>Les meilleurs capteurs IoT en 2025</h2>
-                <p>Découvrez les capteurs incontournables pour vos projets IoT...</p>
+                <p>Découvrez les capteurs incontournables pour vos projets IoT en 2025, y compris des capteurs de température, d'humidité, de mouvement, et bien plus encore. Ces capteurs sont essentiels pour la collecte de données en temps réel et l'optimisation des processus.</p>
+                <a href="#">Lire la suite</a>
+            </div>
+            <div class="post">
+                <h2>Comment connecter votre maison avec l'IoT ?</h2>
+                <p>Dans cet article, nous expliquons comment vous pouvez transformer votre maison en un espace intelligent grâce à l'IoT. Découvrez les meilleures technologies et équipements à intégrer pour un contrôle total de votre environnement domestique.</p>
+                <a href="#">Lire la suite</a>
+            </div>
+            <div class="post">
+                <h2>La sécurité dans les réseaux IoT</h2>
+                <p>La sécurité est un défi majeur pour l'IoT. Dans cet article, nous aborderons les menaces potentielles et les bonnes pratiques à adopter pour protéger vos appareils et réseaux IoT contre les cyberattaques.</p>
+                <a href="#">Lire la suite</a>
             </div>
         </section>
         <section id="about">
             <h2>À propos</h2>
-            <p>Ce blog est dédié aux passionnés de l'Internet des objets et aux makers.</p>
+            <p>Ce blog est dédié aux passionnés de l'Internet des objets et aux makers. Vous trouverez ici des guides, des tutoriels, et des conseils pour développer vos propres projets IoT. Mon objectif est de partager mes expériences et d'aider les autres à tirer le meilleur parti des technologies connectées.</p>
         </section>
         <section id="contact">
             <h2>Contact</h2>
-            <p>Envoyez-moi un email à <a href="mailto:contact@mon-domaine.ovh">contact@mon-domaine.ovh</a>.</p>
+            <p>Envoyez-moi un email à <a href="mailto:contact@mon-domaine.ovh">contact@mon-domaine.ovh</a> pour toute question ou collaboration. Je suis toujours ouvert à de nouvelles idées et projets IoT.</p>
         </section>
     </div>
     <footer>
-        &copy; 2025 Mon Blog IoT - Tous droits réservés.
+        &copy; 2025 Mon Blog IoT - Tous droits réservés. | <a href="#contact">Contact</a>
     </footer>
 </body>
 </html>
