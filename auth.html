@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "TON_API_KEY",
+            authDomain: "TON_PROJET.firebaseapp.com",
+            projectId: "TON_PROJET",
+            storageBucket: "TON_PROJET.appspot.com",
+            messagingSenderId: "TON_SENDER_ID",
+            appId: "TON_APP_ID",
+            measurementId: "G-1P0JN00FYK"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const registerForm = document.getElementById("register-form");
+            const loginForm = document.getElementById("login-form");
+            const message = document.getElementById("message");
+
+            registerForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const email = document.getElementById("register-email").value;
+                const password = document.getElementById("register-password").value;
+                
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        message.textContent = "Compte créé avec succès ! Vous pouvez vous connecter.";
+                    })
+                    .catch((error) => {
+                        message.textContent = "Erreur : " + error.message;
+                    });
+            });
+
+            loginForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const email = document.getElementById("login-email").value;
+                const password = document.getElementById("login-password").value;
+
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        window.location.href = "index.html";
+                    })
+                    .catch((error) => {
+                        message.textContent = "Erreur : " + error.message;
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Connexion / Inscription</h1>
+    </header>
+
+    <p id="message"></p>
+
+    <section>
+        <h2>S'inscrire</h2>
+        <form id="register-form">
+            <input type="email" id="register-email" placeholder="Email" required>
+            <input type="password" id="register-password" placeholder="Mot de passe" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Se connecter</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+    </section>
+
+    <a href="index.html">Retour à l'accueil</a>
+</body>
+</html>
