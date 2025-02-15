@@ -61,16 +61,18 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #1E2329;
             margin: 0;
+            color: #FFFFFF;
         }
         .card {
-            background: white;
+            background: #1E2329;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             text-align: center;
             width: 350px;
+            border: 1px solid #474D57;
         }
         h1 {
             font-size: 24px;
@@ -92,8 +94,14 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #474D57;
             border-radius: 5px;
+            background: transparent;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+        input::placeholder {
+            color: #474D57;
         }
         button {
             width: 100%;
@@ -108,6 +116,14 @@
         .separator {
             margin: 15px 0;
             font-weight: bold;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #474D57;
+            line-height: 0.1em;
+        }
+        .separator span {
+            background: #1E2329;
+            padding: 0 10px;
         }
         .google-btn {
             display: flex;
@@ -115,12 +131,13 @@
             justify-content: center;
             width: 100%;
             padding: 10px;
-            background-color: white;
+            background-color: #FFFFFF;
             color: black;
-            border: 1px solid #ccc;
+            border: 1px solid #474D57;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
         }
         .google-btn img {
             width: 20px;
@@ -131,7 +148,7 @@
             font-size: 14px;
         }
         .register-link a {
-            color: #007bff;
+            color: #A37200;
             text-decoration: none;
             font-weight: bold;
         }
@@ -146,23 +163,26 @@
         <p id="message"></p>
 
         <form id="login-form">
-            <label for="login-email">Votre e-mail</label>
-            <input type="email" id="login-email" placeholder="E-mail" required>
+            <label for="login-email">Votre email</label>
+            <input type="email" id="login-email" placeholder="Votre email" required>
 
             <label for="login-password">Votre mot de passe</label>
-            <input type="password" id="login-password" placeholder="Mot de passe" required>
+            <input type="password" id="login-password" placeholder="Votre mot de passe" required>
 
             <button type="submit">Se Connecter</button>
         </form>
 
-        <div class="separator">ou</div>
+        <div class="separator"><span>ou</span></div>
 
         <button id="google-login-btn" class="google-btn">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
             Continuer avec Google
         </button>
 
-        <p class="register-link">Créer un compte <a href="register.html">1Day1Game</a></p>
+        <p class="register-link">
+            <a href="register.html">Créer un compte 1Day1Game</a>
+        </p>
+
     </div>
 
 </body>
