@@ -1,10 +1,10 @@
 // Vérifier si l'utilisateur est connecté
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
-        // L'utilisateur est connecté, afficher son email
-        document.getElementById('user-email').textContent = user.email;
+        // Si l'utilisateur est connecté, afficher son email
+        document.getElementById('user-email').textContent = `Connecté en tant que ${user.email}`;
     } else {
-        // Si l'utilisateur n'est pas connecté, laisser vide ou afficher un message
+        // Si l'utilisateur n'est pas connecté, afficher "Non connecté"
         document.getElementById('user-email').textContent = 'Non connecté';
     }
 });
