@@ -20,19 +20,25 @@ body {
     padding: 10px 20px;
     border-bottom: 1px solid #474D57;
     width: 100%;
-    box-sizing: border-box;
-    flex-wrap: wrap; /* Permet de répartir les éléments sur plusieurs lignes si nécessaire */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    overflow: hidden; /* Empêche les éléments de dépasser */
+    flex-wrap: wrap;
 }
 
 /* Logo */
 .logo {
+    flex-shrink: 1;
+    flex-grow: 1;
     font-size: 24px;
     font-weight: bold;
-    flex-grow: 1; /* Permet au logo de prendre l'espace restant */
 }
 
 /* Informations de l'utilisateur */
 .user-info {
+    flex-shrink: 1;
     font-size: 14px;
     color: #EAECEF;
 }
@@ -41,7 +47,6 @@ body {
 .auth-buttons {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap; /* Permet d'adapter les boutons en fonction de la largeur */
 }
 
 .btn {
@@ -52,8 +57,6 @@ body {
     color: #EAECEF;
     text-align: center;
     display: inline-block;
-    min-width: 120px; /* Limite la largeur minimale des boutons */
-    box-sizing: border-box;
 }
 
 .orange {
@@ -72,75 +75,80 @@ body {
     background-color: #2C333B;
 }
 
+/* Conteneur des cartes */
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 80%;
+    margin-top: 120px; /* Décalage pour laisser de la place à la top bar */
+}
+
 /* Carte */
 .card {
     background-color: #171A1F;
-    padding: 40px; /* Augmenté pour plus d'espace */
+    padding: 30px;
     border-radius: 24px;
     border: 1px solid #474D57;
     text-align: center;
-    width: 350px; /* Carte plus large */
+    width: 300px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centre tous les éléments à l'intérieur */
+    align-items: center;
 }
 
 /* Titres */
 .title {
     text-align: left;
-    font-size: 32px;
-    width: 100%; /* Prend toute la largeur */
-    margin-bottom: 20px;
-}
-
-.subtitle {
-    font-size: 32px;
+    font-size: 24px;
     width: 100%;
-    margin-bottom: 25px;
-    text-align: left;
-}
-
-/* Formulaire */
-label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    text-align: left;
-    display: block;
-}
-
-/* Champ de saisie */
-input {
-    width: 100%;
-    padding: 12px;
     margin-bottom: 15px;
-    font-size: 16px;
-    border: 1px solid #474D57;
-    border-radius: 10px;
-    background-color: transparent;
-    color: #EAECEF;
-    outline: none;
+}
+
+/* Tableau du classement */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px;
     text-align: left;
-    box-sizing: border-box;
-    transition: border 0.3s ease;
+    border-bottom: 1px solid #474D57;
 }
 
-/* Ajout d'une bordure orange au survol */
-input:hover {
-    border: 1px solid #EE8B27;
+.table th {
+    font-weight: bold;
 }
 
-/* Ajout d'une bordure orange et du curseur orange pendant la saisie */
-input:focus {
-    border: 1px solid #EE8B27;
-    caret-color: #EE8B27;
+.table td {
+    font-size: 14px;
 }
 
-input::placeholder {
-    color: #474D57;
+.table-container {
+    overflow-y: auto;
+    max-height: 150px;
 }
 
-/* Bouton Connexion */
-.login-btn {
+/* Titre du Timer */
+.subtitle {
+    font-size: 24px;
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Timer */
+.timer {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #EE8B27;
+}
+
+/* Bouton jouer */
+.play-button {
     width: 100%;
     padding: 12px;
     background-color: #EE8B27;
@@ -152,151 +160,96 @@ input::placeholder {
     transition: background-color 0.3s ease;
 }
 
-.login-btn:hover {
+.play-button:hover {
     background-color: #F2A557;
 }
 
-/* Barre séparatrice */
-.separator {
-    text-align: center;
-    margin: 25px 0;
-    position: relative;
-    width: 100%;
-}
-
-.separator span {
-    padding: 0 10px;
-    background-color: transparent;
-    font-size: 14px;
-}
-
-.separator::before,
-.separator::after {
-    content: "";
-    height: 1px;
-    background: #474D57;
-    position: absolute;
-    width: 40%;
-    top: 50%;
-}
-
-.separator::before {
-    left: 0;
-}
-
-.separator::after {
-    right: 0;
-}
-
-/* Bouton Google */
-.google-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #474D57;
-    background: transparent;
-    color: #EAECEF;
+/* Mission */
+.mission {
+    margin-top: 20px;
     font-size: 16px;
+    text-align: left;
+}
+
+/* Séparateur des cartes */
+.separator {
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid #474D57;
+    margin-bottom: 20px;
+}
+
+/* Carte centrale */
+.center-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Style du bouton "Jouer" */
+.play-btn {
+    background-color: #EE8B27;
+    padding: 12px;
     border-radius: 10px;
+    border: none;
+    color: white;
     cursor: pointer;
+    width: 100%;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-/* Alignement du logo Google à gauche et texte centré */
-.google-btn img {
-    width: 20px;
-    margin-right: 10px;
+.play-btn:hover {
+    background-color: #F2A557;
 }
 
-.google-btn span {
-    flex-grow: 1;
-    text-align: center;
+/* Détails des missions */
+.missions {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: left;
 }
 
-.google-btn:hover {
-    background-color: #2C333B;
+/* Mise en page sur mobile */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
 }
 
-/* Lien d'inscription */
-.register-link {
-    margin-top: 20px;
-    text-align: center;
+/* Footer */
+footer {
+    background-color: #171A1F;
+    color: #EAECEF;
+    padding: 20px;
     width: 100%;
+    text-align: center;
+    border-top: 1px solid #474D57;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
-.register-link a {
+/* Mise en page footer */
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Alignement et espacement du footer */
+footer a {
     color: #EE8B27;
-    font-size: 14px;
-    transition: color 0.3s ease;
-    text-decoration: none; /* Supprime le soulignement */
-}
-
-.register-link a:hover {
-    color: #F2A557;
-}
-
-/* Conteneur de la case à cocher */
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    margin-top: 15px; /* Ajoute de l'espace avec le champ précédent */
-    margin-bottom: 20px; /* Ajoute de l'espace avant le bouton */
-    color: #EAECEF; /* Texte en blanc */
-}
-
-/* Style de la checkbox */
-.checkbox-container input[type="checkbox"] {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #474D57; /* Même bordure que les champs */
-    background: transparent; /* Fond transparent */
-    border-radius: 3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s, border-color 0.3s;
-}
-
-/* Effet lorsqu'on coche la case */
-.checkbox-container input[type="checkbox"]:checked {
-    background: #EAECEF; /* Fond blanc */
-    border-color: #474D57;
-}
-
-/* Ajout de la coche grise */
-.checkbox-container input[type="checkbox"]::before {
-    content: "✔";
-    font-size: 14px;
-    color: #474D57; /* Gris comme la bordure */
-    display: none;
-}
-
-/* Affichage de la coche lorsqu'on coche */
-.checkbox-container input[type="checkbox"]:checked::before {
-    display: block;
-}
-
-/* Style du texte */
-.checkbox-container label {
-    cursor: pointer;
-    font-size: 14px;
-}
-
-/* Liens dans le texte */
-.checkbox-container label a {
     text-decoration: none;
-    color: inherit;
-    border-bottom: 1px dotted #EAECEF; /* Souligné en pointillé */
+    font-size: 14px;
 }
 
-.checkbox-container label a:hover {
-    text-decoration: none; /* Empêche le soulignement par défaut */
-    border-bottom-color: #BBBBBB; /* Changer la couleur du soulignement au survol */
-    color: #BBBBBB; /* Rendre le texte plus foncé au survol */
+footer a:hover {
+    color: #F2A557;
 }
