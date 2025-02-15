@@ -1,0 +1,146 @@
+/* Fond général */
+body {
+    background-color: #1E2329;
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+/* Carte */
+.card {
+    background-color: #242933;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #474D57;
+    text-align: left;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Titres */
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Formulaire */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #474D57;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #FFFFFF;
+    outline: none;
+}
+
+input::placeholder {
+    color: #474D57;
+}
+
+/* Bouton Connexion */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #A37200;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #805A00;
+}
+
+/* Barre séparatrice */
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.separator span {
+    background: #242933;
+    padding: 0 10px;
+    color: #474D57;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    height: 1px;
+    background: #474D57;
+    position: absolute;
+    width: 40%;
+    top: 50%;
+}
+
+.separator::before {
+    left: 0;
+}
+
+.separator::after {
+    right: 0;
+}
+
+/* Bouton Google */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #474D57;
+    background: transparent;
+    color: #FFFFFF;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.google-btn img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.google-btn:hover {
+    background-color: #2C333B;
+}
+
+/* Lien d'inscription */
+.register-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.register-link a {
+    color: #A37200;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
