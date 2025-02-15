@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentification</title>
+    <title>Authentification - 1Day1Game</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 
         // Configuration Firebase
         const firebaseConfig = {
@@ -23,28 +23,10 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
-        provider.setCustomParameters({
-            client_id: "134975717979-p8olj2dss5n5d757j7rrhadi5090ojgv.apps.googleusercontent.com"
-        })
 
         document.addEventListener("DOMContentLoaded", () => {
-            const registerForm = document.getElementById("register-form");
             const loginForm = document.getElementById("login-form");
             const message = document.getElementById("message");
-
-            registerForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const email = document.getElementById("register-email").value;
-                const password = document.getElementById("register-password").value;
-                
-                createUserWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                        message.textContent = "Compte créé avec succès ! Vous pouvez vous connecter.";
-                    })
-                    .catch((error) => {
-                        message.textContent = "Erreur : " + error.message;
-                    });
-            });
 
             loginForm.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -60,50 +42,97 @@
                     });
             });
 
-            // Gestion de la connexion avec Google
+            // Connexion avec Google
             document.getElementById("google-login-btn").addEventListener("click", () => {
                 signInWithPopup(auth, provider)
                     .then((result) => {
-                        console.log("Utilisateur connecté :", result.user);
-                        window.location.href = "index.html"; // Redirige vers l'accueil
+                        window.location.href = "index.html";
                     })
                     .catch((error) => {
-                        console.error("Erreur de connexion :", error.message);
+                        message.textContent = "Erreur : " + error.message;
                     });
             });
         });
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 300px;
+            margin: auto;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .separator {
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Connexion / Inscription</h1>
-    </header>
+
+    <h1>1Day1Game</h1>
+    <h2>Connexion</h2>
 
     <p id="message"></p>
 
-    <section>
-        <h2>S'inscrire</h2>
-        <form id="register-form">
-            <input type="email" id="register-email" placeholder="Email" required>
-            <input type="password" id="register-password" placeholder="Mot de passe" required>
-            <button type="submit">S'inscrire</button>
-        </form>
-    </section>
+    <form id="login-form">
+        <label for="login-email">Votre email</label>
+        <input type="email" id="login-email" placeholder="Email" required>
 
-    <section>
-        <h2>Se connecter</h2>
-        <form id="login-form">
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-        </form>
-    </section>
+        <label for="login-password">Votre mot de passe</label>
+        <input type="password" id="login-password" placeholder="Mot de passe" required>
 
-    <button id="google-login-btn">
+        <button type="submit">Se Connecter</button>
+    </form>
+
+    <div class="separator">ou</div>
+
+    <button id="google-login-btn" class="google-btn">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
-        Se connecter avec Google
+        Continuer avec Google
     </button>
 
-    <a href="index.html">Retour à l'accueil</a>
 </body>
 </html>
