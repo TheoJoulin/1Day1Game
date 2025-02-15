@@ -1,91 +1,110 @@
-/* Fond général */
 body {
-    background-color: #171A1F;
-    color: #EAECEF;
     font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
     margin: 0;
+    padding: 0;
 }
 
-/* Barre supérieure */
 .top-bar {
-    background-color: #171A1F;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px 20px;
-    border-bottom: 1px solid #474D57;
+    background-color: #333;
+    color: white;
 }
 
-/* Logo */
-.logo {
-    font-size: 24px;
-    font-weight: bold;
+.top-bar .logo {
+    font-size: 1.5em;
 }
 
-/* Informations de l'utilisateur */
-.user-info {
-    font-size: 14px;
-    color: #EAECEF;
-}
-
-/* Boutons */
-.auth-buttons {
+.top-bar .user-info, .top-bar .auth-buttons {
     display: flex;
-    gap: 10px;
+    align-items: center;
 }
 
-.btn {
-    padding: 10px 20px;
+.auth-buttons a {
+    margin-left: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    background-color: gray;
     border-radius: 5px;
-    text-decoration: none;
-    font-size: 14px;
-    color: #EAECEF;
-    text-align: center;
-    display: inline-block;
 }
 
-.orange {
-    background-color: #EE8B27;
+.auth-buttons a:hover {
+    opacity: 0.8;
 }
 
-.orange:hover {
-    background-color: #F2A557;
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
 }
 
-.gray {
-    background-color: #474D57;
-}
-
-.gray:hover {
-    background-color: #2C333B;
-}
-
-/* Conteneur des jeux */
-.games-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+.card {
+    background-color: white;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    overflow: hidden;
 }
 
-.game-button {
-    background-color: #474D57;
-    color: #EAECEF;
-    padding: 20px;
+.card h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.ranking-table {
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ranking-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ranking-table table th, .ranking-table table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.scrollable {
+    height: 10px;
+    background: #ddd;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.scrollable {
+    /* Ajouter un effet défilant si nécessaire */
+}
+
+.middle-card {
     text-align: center;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 16px;
 }
 
-.game-button:hover {
-    background-color: #2C333B;
+.middle-card button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #171A1F;
-    border-top: 1px solid #474D57;
+.middle-card button:hover {
+    opacity: 0.8;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
 }
