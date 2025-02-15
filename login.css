@@ -43,12 +43,13 @@ body {
 label {
     font-size: 14px;
     margin-bottom: 5px;
-    text-align: left; /* Centre les labels */
+    text-align: left;
     display: block;
 }
 
+/* Champ de saisie */
 input {
-    width: 100%; /* Même largeur que les boutons */
+    width: 100%;
     padding: 12px;
     margin-bottom: 15px;
     font-size: 16px;
@@ -57,8 +58,20 @@ input {
     background-color: transparent;
     color: #FFFFFF;
     outline: none;
-    text-align: left; /* Centre le texte dans le champ */
-    box-sizing: border-box; /* Ajuste la largeur pour éviter les débordements */
+    text-align: left;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+/* Ajout d'une bordure orange au survol */
+input:hover {
+    border: 1px solid #EE8B27;
+}
+
+/* Ajout d'une bordure orange et du curseur orange pendant la saisie */
+input:focus {
+    border: 1px solid #EE8B27;
+    caret-color: #EE8B27;
 }
 
 input::placeholder {
@@ -75,6 +88,7 @@ input::placeholder {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .login-btn:hover {
@@ -126,11 +140,18 @@ input::placeholder {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+/* Alignement du logo Google à gauche et texte centré */
 .google-btn img {
     width: 20px;
     margin-right: 10px;
+}
+
+.google-btn span {
+    flex-grow: 1;
+    text-align: center;
 }
 
 .google-btn:hover {
@@ -148,7 +169,7 @@ input::placeholder {
     color: #EE8B27;
     font-size: 14px;
     transition: color 0.3s ease;
-    text-decoration: none; /* Supprimé le soulignement */
+    text-decoration: none; /* Supprime le soulignement */
 }
 
 .register-link a:hover {
