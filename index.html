@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'Accueil - Mini-jeux</title>
+    <title>Accueil | 1Day1Game</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="script.js" defer></script>
 </head>
 <body>
     <header>
+        <div class="top-bar">
+            <div class="logo">1Day1Game</div>
+            <div class="user-info">
+                <span>Connecté en tant que</span>
+                <span id="user-email">email@example.com</span> <!-- Email de l'utilisateur -->
+            </div>
+            <div class="auth-buttons">
+                <a href="register.html" class="btn orange">Inscription</a>
+                <a href="login.html" class="btn gray">Connexion</a>
+            </div>
+        </div>
         <h1>Bienvenue sur notre plateforme de Mini-jeux !</h1>
         <p>Choisissez un jeu et amusez-vous !</p>
     </header>
-
-    <!-- Conteneur pour le bouton de connexion en haut à droite -->
-    <div class="auth-container">
-        <a href="login.html" class="sign-in-btn">Connexion</a>
-        <a href="register.html" class="sign-in-btn">Inscription</a>
-    </div>
 
     <section class="games-container">
         <a href="snake.html" class="game-button">Snake</a>
@@ -30,7 +35,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Mini-jeux. Tous droits réservés.</p>
+        <p>&copy; 2025 1Day1Game. Tous droits réservés.</p>
     </footer>
 </body>
 </html>
