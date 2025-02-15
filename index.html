@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'Accueil - Mini-jeux</title>
+    <title>Accueil | 1Day1Gamex</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
@@ -15,16 +15,13 @@
         <div class="top-bar">
             <div class="logo">1Day1Game</div>
             <div class="user-info">
-                <span>Connecté en tant que</span>
                 <span id="user-email">Non connecté</span>
             </div>
             <div class="auth-buttons">
-                <a href="register.html" class="btn orange">Inscription</a>
                 <a href="login.html" class="btn gray">Connexion</a>
+                <a href="register.html" class="btn orange">Inscription</a>
             </div>
         </div>
-        <h1>Bienvenue sur notre plateforme de Mini-jeux !</h1>
-        <p>Choisissez un jeu et amusez-vous !</p>
     </header>
 
     <!-- Section des cartes -->
@@ -51,7 +48,19 @@
             </div>
         </div>
 
-        <!-- Carte Classement du Jour -->
+        <!-- Carte du Milieu -->
+        <div class="card middle-card">
+            <h2 id="current-date"></h2>
+            <p>Temps restant : <span id="timer"></span></p>
+            <button class="btn orange" id="play-button">Jouer au jeu du jour</button>
+            <h3>Missions</h3>
+            <ul id="missions">
+                <!-- Dynamique via JS -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Carte Classement du Jour -->
         <div class="card">
             <h2>Classement du Jour</h2>
             <div class="ranking-table">
@@ -72,19 +81,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Carte du Milieu -->
-        <div class="card middle-card">
-            <h2 id="current-date"></h2>
-            <p>Temps restant : <span id="timer"></span></p>
-            <button class="btn orange" id="play-button">Jouer au jeu du jour</button>
-            <h3>Missions</h3>
-            <ul id="missions">
-                <!-- Dynamique via JS -->
-            </ul>
-        </div>
-    </section>
-
     <footer>
         <p>&copy; 2025 Mini-jeux. Tous droits réservés.</p>
     </footer>
