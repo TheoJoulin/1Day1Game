@@ -54,7 +54,7 @@ input {
     background-color: transparent;
     color: #FFFFFF;
     outline: none;
-    text-align: center;
+    text-align: left;
     box-sizing: border-box; /* Pour éviter que le padding agrandisse la largeur */
 }
 
