@@ -131,7 +131,7 @@ input::placeholder {
 .google-btn {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
     padding: 12px;
     border: 1px solid #474D57;
