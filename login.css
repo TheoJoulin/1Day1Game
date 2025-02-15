@@ -14,24 +14,27 @@ body {
 /* Carte */
 .card {
     background-color: #171A1F;
-    padding: 40px; /* Agrandi pour un meilleur rendu */
+    padding: 40px; /* Augmenté pour plus d'espace */
     border-radius: 10px;
     border: 1px solid #474D57;
     text-align: center;
-    width: 350px; /* Agrandi pour plus d'espace */
+    width: 350px; /* Carte plus large */
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centre tous les éléments à l'intérieur */
 }
 
 /* Titres */
 .title {
     text-align: left;
     font-size: 32px;
+    width: 100%; /* Prend toute la largeur */
     margin-bottom: 20px;
 }
 
 .subtitle {
     font-size: 32px;
+    width: 100%;
     margin-bottom: 25px;
     text-align: left;
 }
@@ -39,23 +42,23 @@ body {
 /* Formulaire */
 label {
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    text-align: center; /* Centre les labels */
     display: block;
-    text-align: left;
 }
 
 input {
-    width: calc(100% - 24px); /* Même largeur que les boutons */
+    width: 100%; /* Même largeur que les boutons */
     padding: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 16px;
     border: 1px solid #474D57;
     border-radius: 5px;
     background-color: transparent;
     color: #FFFFFF;
     outline: none;
-    text-align: left;
-    box-sizing: border-box; /* Pour éviter que le padding agrandisse la largeur */
+    text-align: center; /* Centre le texte dans le champ */
+    box-sizing: border-box; /* Ajuste la largeur pour éviter les débordements */
 }
 
 input::placeholder {
@@ -83,6 +86,7 @@ input::placeholder {
     text-align: center;
     margin: 25px 0;
     position: relative;
+    width: 100%;
 }
 
 .separator span {
@@ -137,6 +141,7 @@ input::placeholder {
 .register-link {
     margin-top: 20px;
     text-align: center;
+    width: 100%;
 }
 
 .register-link a {
