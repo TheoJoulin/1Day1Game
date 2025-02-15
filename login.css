@@ -1,6 +1,6 @@
 /* Fond général */
 body {
-    background-color: #2596BE;
+    background-color: #171A1F;
     color: #FFFFFF;
     font-family: Arial, sans-serif;
     display: flex;
@@ -13,7 +13,7 @@ body {
 
 /* Carte */
 .card {
-    background-color:#2596BE:
+    background-color: #171A1F;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #474D57;
