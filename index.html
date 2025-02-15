@@ -9,17 +9,24 @@
 </head>
 <body>
     <header>
-        <h1 id="welcomeMessage">Bienvenue sur Jeu TJO</h1>
-        <div id="pointContainer">
-            <span id="point">.</span>
-        </div>
+        <h1>Bienvenue sur notre plateforme de Mini-jeux !</h1>
+        <p>Choisissez un jeu et amusez-vous !</p>
     </header>
 
-    <!-- Animation de la roulette -->
-    <div id="roulette">
-        <p id="gameName">...</p>
-        <button id="playButton" style="display:none;">Jouer</button>
+    <!-- Conteneur pour le bouton de connexion en haut à droite -->
+    <div class="auth-container">
+        <a href="auth.html" class="sign-in-btn">Se connecter / S'inscrire</a>
     </div>
+
+    <section class="games-container">
+        <a href="snake.html" class="game-button">Snake</a>
+        <a href="demineur.html" class="game-button">Démineur</a>
+        <a href="guess-number.html" class="game-button">Trouve le nombre</a>
+        <a href="cookie-clicker.html" class="game-button">Cookie Clicker</a>
+        <a href="memory.html" class="game-button">Memory</a>
+        <a href="simon.html" class="game-button">Simon</a>
+        <a href="sudoku.html" class="game-button">Sudoku</a>
+    </section>
 
     <footer>
         <p>&copy; 2025 Mini-jeux. Tous droits réservés.</p>
