@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Se connecter | 1Day1Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 
-        // Configuration Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBb976hwnx_TaVHrQ7XTHMDLx_frw9cJIE",
             authDomain: "day1game-5f8a8.firebaseapp.com",
@@ -25,165 +24,53 @@
         const provider = new GoogleAuthProvider();
 
         document.addEventListener("DOMContentLoaded", () => {
-            const loginForm = document.getElementById("login-form");
-            const message = document.getElementById("message");
-
-            loginForm.addEventListener("submit", (e) => {
+            document.getElementById("login-form").addEventListener("submit", (e) => {
                 e.preventDefault();
                 const email = document.getElementById("login-email").value;
                 const password = document.getElementById("login-password").value;
 
                 signInWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                        window.location.href = "index.html";
-                    })
-                    .catch((error) => {
-                        message.textContent = "Erreur : " + error.message;
-                    });
+                    .then(() => window.location.href = "index.html")
+                    .catch(error => alert("Erreur : " + error.message));
             });
 
-            // Connexion avec Google
             document.getElementById("google-login-btn").addEventListener("click", () => {
                 signInWithPopup(auth, provider)
-                    .then((result) => {
-                        window.location.href = "index.html";
-                    })
-                    .catch((error) => {
-                        message.textContent = "Erreur : " + error.message;
-                    });
+                    .then(() => window.location.href = "index.html")
+                    .catch(error => alert("Erreur : " + error.message));
             });
         });
     </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #1E2329;
-            margin: 0;
-            color: #FFFFFF;
-        }
-        .card {
-            background: #1E2329;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 350px;
-            border: 1px solid #474D57;
-        }
-        h1 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        label {
-            align-self: flex-start;
-            margin-bottom: 5px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #474D57;
-            border-radius: 5px;
-            background: transparent;
-            color: #FFFFFF;
-            font-size: 14px;
-        }
-        input::placeholder {
-            color: #474D57;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .separator {
-            margin: 15px 0;
-            font-weight: bold;
-            width: 100%;
-            text-align: center;
-            border-bottom: 1px solid #474D57;
-            line-height: 0.1em;
-        }
-        .separator span {
-            background: #1E2329;
-            padding: 0 10px;
-        }
-        .google-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 10px;
-            background-color: #FFFFFF;
-            color: black;
-            border: 1px solid #474D57;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .google-btn img {
-            width: 20px;
-            margin-right: 10px;
-        }
-        .register-link {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .register-link a {
-            color: #A37200;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="card">
+            <h1 class="title">1Day1Game</h1>
+            <h2 class="subtitle">Connexion</h2>
 
-    <div class="card">
-        <h1>1Day1Game</h1>
-        <h2>Connexion</h2>
+            <form id="login-form">
+                <label for="login-email">Votre e-mail</label>
+                <input type="email" id="login-email" placeholder="E-mail" required>
 
-        <p id="message"></p>
+                <label for="login-password">Votre mot de passe</label>
+                <input type="password" id="login-password" placeholder="Votre mot de passe" required>
 
-        <form id="login-form">
-            <label for="login-email">Votre e-mail</label>
-            <input type="email" id="login-email" placeholder="E-mail" required>
+                <button type="submit" class="login-btn">Se Connecter</button>
+            </form>
 
-            <label for="login-password">Votre mot de passe</label>
-            <input type="password" id="login-password" placeholder="Mot de passe" required>
+            <div class="separator">
+                <span>ou</span>
+            </div>
 
-            <button type="submit">Se Connecter</button>
-        </form>
-
-        <div class="separator"><span>ou</span></div>
-
-        <button id="google-login-btn" class="google-btn">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
-            Continuer avec Google
-        </button>
+            <button id="google-login-btn" class="google-btn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+                Continuer avec Google
+            </button>
+        </div>
 
         <p class="register-link">
             <a href="register.html">Créer un compte 1Day1Game</a>
         </p>
-
     </div>
-
 </body>
 </html>
