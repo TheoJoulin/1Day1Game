@@ -19,26 +19,16 @@ body {
     align-items: center;
     padding: 10px 20px;
     border-bottom: 1px solid #474D57;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    overflow: hidden; /* Empêche les éléments de dépasser */
-    flex-wrap: wrap;
 }
 
 /* Logo */
 .logo {
-    flex-shrink: 1;
-    flex-grow: 1;
     font-size: 24px;
     font-weight: bold;
 }
 
 /* Informations de l'utilisateur */
 .user-info {
-    flex-shrink: 1;
     font-size: 14px;
     color: #EAECEF;
 }
