@@ -23,6 +23,9 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({
+            client_id: "134975717979-p8olj2dss5n5d757j7rrhadi5090ojgv.apps.googleusercontent.com"
+        })
 
         document.addEventListener("DOMContentLoaded", () => {
             const registerForm = document.getElementById("register-form");
