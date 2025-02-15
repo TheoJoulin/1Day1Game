@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil | 1Day1Game</title>
+    <title>Page d'Accueil - Mini-jeux</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
     <script type="module" src="script.js" defer></script>
 </head>
 <body>
@@ -12,57 +15,80 @@
         <div class="top-bar">
             <div class="logo">1Day1Game</div>
             <div class="user-info">
+                <span>Connecté en tant que</span>
                 <span id="user-email">Non connecté</span>
             </div>
             <div class="auth-buttons">
-                <a href="login.html" class="btn gray">Connexion</a>
                 <a href="register.html" class="btn orange">Inscription</a>
+                <a href="login.html" class="btn gray">Connexion</a>
             </div>
         </div>
         <h1>Bienvenue sur notre plateforme de Mini-jeux !</h1>
         <p>Choisissez un jeu et amusez-vous !</p>
     </header>
 
-    <section class="games-container">
-        <a href="snake.html" class="game-button">Snake</a>
-        <a href="demineur.html" class="game-button">Démineur</a>
-        <a href="guess-number.html" class="game-button">Trouve le nombre</a>
-        <a href="cookie-clicker.html" class="game-button">Cookie Clicker</a>
-        <a href="memory.html" class="game-button">Memory</a>
-        <a href="simon.html" class="game-button">Simon</a>
-        <a href="sudoku.html" class="game-button">Sudoku</a>
+    <!-- Section des cartes -->
+    <section class="cards-container">
+        <!-- Carte Classement Général -->
+        <div class="card">
+            <h2>Classement Général</h2>
+            <div class="ranking-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nom</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="general-ranking">
+                        <!-- Dynamique via JS -->
+                    </tbody>
+                </table>
+                <div class="scrollable">
+                    <!-- Ajouter une barre de défilement ici -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte Classement du Jour -->
+        <div class="card">
+            <h2>Classement du Jour</h2>
+            <div class="ranking-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nom</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daily-ranking">
+                        <!-- Dynamique via JS -->
+                    </tbody>
+                </table>
+                <div class="scrollable">
+                    <!-- Ajouter une barre de défilement ici -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte du Milieu -->
+        <div class="card middle-card">
+            <h2 id="current-date"></h2>
+            <p>Temps restant : <span id="timer"></span></p>
+            <button class="btn orange" id="play-button">Jouer au jeu du jour</button>
+            <h3>Missions</h3>
+            <ul id="missions">
+                <!-- Dynamique via JS -->
+            </ul>
+        </div>
     </section>
 
     <footer>
         <p>&copy; 2025 Mini-jeux. Tous droits réservés.</p>
     </footer>
 
-    <!-- Script Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBb976hwnx_TaVHrQ7XTHMDLx_frw9cJIE",
-            authDomain: "day1game-5f8a8.firebaseapp.com",
-            projectId: "day1game-5f8a8",
-            storageBucket: "day1game-5f8a8.firebasestorage.app",
-            messagingSenderId: "134975717979",
-            appId: "1:134975717979:web:8a20021b5a391ea5baf57e",
-            measurementId: "G-1P0JN00FYK"
-        };
-
-        // Initialisation de Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-        // Vérifier l'état de l'utilisateur
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                document.getElementById('user-email').textContent = user.email;
-            } else {
-                document.getElementById('user-email').textContent = 'Non connecté';
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
