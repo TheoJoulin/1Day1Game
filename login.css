@@ -43,7 +43,7 @@ body {
 label {
     font-size: 14px;
     margin-bottom: 5px;
-    text-align: center; /* Centre les labels */
+    text-align: left; /* Centre les labels */
     display: block;
 }
 
@@ -57,7 +57,7 @@ input {
     background-color: transparent;
     color: #FFFFFF;
     outline: none;
-    text-align: center; /* Centre le texte dans le champ */
+    text-align: left; /* Centre le texte dans le champ */
     box-sizing: border-box; /* Ajuste la largeur pour éviter les débordements */
 }
 
@@ -69,7 +69,7 @@ input::placeholder {
 .login-btn {
     width: 100%;
     padding: 12px;
-    background-color: #A37200;
+    background-color: #EE8B27;
     border: none;
     color: #FFFFFF;
     font-size: 16px;
@@ -145,12 +145,12 @@ input::placeholder {
 }
 
 .register-link a {
-    color: #A37200;
+    color: #EE8B27;
     font-size: 14px;
     transition: color 0.3s ease;
     text-decoration: none; /* Supprimé le soulignement */
 }
 
 .register-link a:hover {
-    color: #C59830; /* Texte plus clair au hover */
+    color: #F2A557;
 }
