@@ -14,11 +14,11 @@ body {
 /* Carte */
 .card {
     background-color: #171A1F;
-    padding: 40px; /* Augmenté pour une carte plus grande */
+    padding: 40px; /* Agrandi pour un meilleur rendu */
     border-radius: 10px;
     border: 1px solid #474D57;
-    text-align: left;
-    width: 350px; /* Augmenté pour une carte plus large */
+    text-align: center;
+    width: 350px; /* Agrandi pour plus d'espace */
     display: flex;
     flex-direction: column;
 }
@@ -45,7 +45,7 @@ label {
 }
 
 input {
-    width: 100%;
+    width: calc(100% - 24px); /* Même largeur que les boutons */
     padding: 12px;
     margin-bottom: 20px;
     font-size: 16px;
@@ -54,6 +54,8 @@ input {
     background-color: transparent;
     color: #FFFFFF;
     outline: none;
+    text-align: center;
+    box-sizing: border-box; /* Pour éviter que le padding agrandisse la largeur */
 }
 
 input::placeholder {
