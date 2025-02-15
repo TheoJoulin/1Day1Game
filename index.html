@@ -5,7 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page d'Accueil - Mini-jeux</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script type="module">
+        // Importation des SDK Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBb976hwnx_TaVHrQ7XTHMDLx_frw9cJIE",
+            authDomain: "day1game-5f8a8.firebaseapp.com",
+            projectId: "day1game-5f8a8",
+            storageBucket: "day1game-5f8a8.firebasestorage.app",
+            messagingSenderId: "134975717979",
+            appId: "1:134975717979:web:8a20021b5a391ea5baf57e",
+            measurementId: "G-1P0JN00FYK"
+        };
+
+        // Initialisation de Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Vérifier l'état de l'utilisateur
+        onAuthStateChanged(auth, (user) => {
+            const userStatus = document.getElementById("user-status");
+            if (user) {
+                userStatus.textContent = `Connecté en tant que ${user.email}`;
+                document.getElementById("auth-buttons").innerHTML = `<button id="logout-btn">Se déconnecter</button>`;
+                
+                document.getElementById("logout-btn").addEventListener("click", () => {
+                    signOut(auth).then(() => {
+                        userStatus.textContent = "Non connecté";
+                        document.getElementById("auth-buttons").innerHTML = '<a href="auth.html">Se connecter / S\'inscrire</a>';
+                    });
+                });
+            } else {
+                userStatus.textContent = "Non connecté";
+                document.getElementById("auth-buttons").innerHTML = '<a href="auth.html">Se connecter / S\'inscrire</a>';
+            }
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -13,14 +51,21 @@
         <p>Choisissez un jeu et amusez-vous !</p>
     </header>
 
+    <section class="auth-section">
+        <p id="user-status">Vérification...</p>
+        <div id="auth-buttons">
+            <a href="auth.html">Se connecter / S'inscrire</a>
+        </div>
+    </section>
+
     <section class="games-container">
-        <a href="snake.html" class="game-button" data-game="Jeu 1">Snake</a>
-        <a href="demineur.html" class="game-button" data-game="Jeu 2">Démineur</a>
-        <a href="guess-number.html" class="game-button" data-game="Jeu 3">Trouve le nombre</a>
-        <a href="cookie-clicker.html" class="game-button" data-game="Jeu 4">Cookie Clicker</a>
-        <a href="memory.html" class="game-button" data-game="Jeu 5">Memory</a>
-        <a href="simon.html" class="game-button" data-game="Jeu 6">Simon</a>
-        <a href="sudoku.html" class="game-button" data-game="Jeu 7">Sudoku</a>
+        <a href="snake.html" class="game-button">Snake</a>
+        <a href="demineur.html" class="game-button">Démineur</a>
+        <a href="guess-number.html" class="game-button">Trouve le nombre</a>
+        <a href="cookie-clicker.html" class="game-button">Cookie Clicker</a>
+        <a href="memory.html" class="game-button">Memory</a>
+        <a href="simon.html" class="game-button">Simon</a>
+        <a href="sudoku.html" class="game-button">Sudoku</a>
     </section>
 
     <footer>
