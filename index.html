@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil | 1Day1Game</title>
+    <title>Page d'Accueil - Mini-jeux</title>
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="script.js" defer></script>
 </head>
@@ -13,7 +13,7 @@
             <div class="logo">1Day1Game</div>
             <div class="user-info">
                 <span>Connecté en tant que</span>
-                <span id="user-email"></span>
+                <span id="user-email">Chargement...</span> <!-- Email dynamique -->
             </div>
             <div class="auth-buttons">
                 <a href="login.html" class="btn gray">Connexion</a>
@@ -35,7 +35,34 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 1Day1Game. Tous droits réservés.</p>
+        <p>&copy; 2025 Mini-jeux. Tous droits réservés.</p>
     </footer>
+
+    <!-- Script Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialisation de Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Vérifier l'état de l'utilisateur
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('user-email').textContent = user.email;
+            } else {
+                document.getElementById('user-email').textContent = 'Non connecté';
+            }
+        });
+    </script>
 </body>
 </html>
