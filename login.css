@@ -176,28 +176,61 @@ input::placeholder {
     color: #F2A557;
 }
 
+/* Conteneur de la case à cocher */
 .checkbox-container {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 14px;
+    margin-top: 15px; /* Ajoute de l'espace avec le champ précédent */
+    margin-bottom: 20px; /* Ajoute de l'espace avant le bouton */
+    color: #FFFFFF; /* Texte en blanc */
 }
 
+/* Style de la checkbox */
 .checkbox-container input[type="checkbox"] {
+    appearance: none;
     width: 18px;
     height: 18px;
+    border: 1px solid #474D57; /* Même bordure que les champs */
+    background: transparent; /* Fond transparent */
+    border-radius: 3px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s;
 }
 
+/* Effet lorsqu'on coche la case */
+.checkbox-container input[type="checkbox"]:checked {
+    background: #FFFFFF; /* Fond blanc */
+    border-color: #474D57;
+}
+
+/* Ajout de la coche grise */
+.checkbox-container input[type="checkbox"]::before {
+    content: "✔";
+    font-size: 14px;
+    color: #474D57; /* Gris comme la bordure */
+    display: none;
+}
+
+/* Affichage de la coche lorsqu'on coche */
+.checkbox-container input[type="checkbox"]:checked::before {
+    display: block;
+}
+
+/* Style du texte */
 .checkbox-container label {
-    color: #555; /* Même couleur que le reste du texte */
     cursor: pointer;
+    font-size: 14px;
 }
 
+/* Liens dans le texte */
 .checkbox-container label a {
     text-decoration: none;
-    color: inherit; /* Supprime la couleur bleue par défaut des liens */
-    font-weight: bold;
+    color: inherit;
 }
 
 .checkbox-container label a:hover {
