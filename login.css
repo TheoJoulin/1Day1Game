@@ -139,7 +139,7 @@ input::placeholder {
 .register-link a {
     color: #A37200;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 14px;
 }
 
 .register-link a:hover {
