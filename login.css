@@ -1,6 +1,6 @@
 /* Fond général */
 body {
-    background-color: #1E2329;
+    background-color: #2B3139;
     color: #FFFFFF;
     font-family: Arial, sans-serif;
     display: flex;
@@ -13,7 +13,7 @@ body {
 
 /* Carte */
 .card {
-    background-color: #242933;
+    background-color: #2B3139;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #474D57;
@@ -25,13 +25,13 @@ body {
 
 /* Titres */
 .title {
-    text-align: center;
-    font-size: 24px;
+    text-align: left;
+    font-size: 32px;
     margin-bottom: 20px;
 }
 
 .subtitle {
-    font-size: 20px;
+    font-size: 32px;
     margin-bottom: 20px;
     text-align: left;
 }
@@ -47,6 +47,7 @@ input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
+    font-size: 16px;
     border: 1px solid #474D57;
     border-radius: 5px;
     background-color: transparent;
