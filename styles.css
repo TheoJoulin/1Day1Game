@@ -19,6 +19,11 @@ body {
     align-items: center;
     padding: 10px 20px;
     border-bottom: 1px solid #474D57;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
 }
 
 /* Logo */
@@ -64,6 +69,7 @@ body {
 .gray:hover {
     background-color: #2C333B;
 }
+
 
 /* Conteneur des cartes */
 .cards-container {
