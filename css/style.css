@@ -1,0 +1,251 @@
+/* Fond général */
+body {
+    background-color: #171A1F;
+    color: #EAECEF;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+/* Barre supérieure */
+.top-bar {
+    background-color: #171A1F;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #474D57;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* Logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Informations de l'utilisateur */
+.user-info {
+    font-size: 14px;
+    color: #EAECEF;
+}
+
+/* Boutons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #EAECEF;
+    text-align: center;
+    display: inline-block;
+}
+
+.orange {
+    background-color: #EE8B27;
+}
+
+.orange:hover {
+    background-color: #F2A557;
+}
+
+.gray {
+    background-color: #474D57;
+}
+
+.gray:hover {
+    background-color: #2C333B;
+}
+
+
+/* Conteneur des cartes */
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 80%;
+    margin-top: 120px; /* Décalage pour laisser de la place à la top bar */
+}
+
+/* Carte */
+.card {
+    background-color: #171A1F;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid #474D57;
+    text-align: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titres */
+.title {
+    text-align: left;
+    font-size: 24px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Tableau du classement */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #474D57;
+}
+
+.table th {
+    font-weight: bold;
+}
+
+.table td {
+    font-size: 14px;
+}
+
+.table-container {
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+/* Titre du Timer */
+.subtitle {
+    font-size: 24px;
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Timer */
+.timer {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #EE8B27;
+}
+
+/* Bouton jouer */
+.play-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #EE8B27;
+    border: none;
+    color: #EAECEF;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #F2A557;
+}
+
+/* Mission */
+.mission {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: left;
+}
+
+/* Séparateur des cartes */
+.separator {
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid #474D57;
+    margin-bottom: 20px;
+}
+
+/* Carte centrale */
+.center-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Style du bouton "Jouer" */
+.play-btn {
+    background-color: #EE8B27;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.play-btn:hover {
+    background-color: #F2A557;
+}
+
+/* Détails des missions */
+.missions {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Mise en page sur mobile */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #171A1F;
+    color: #EAECEF;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #474D57;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+/* Mise en page footer */
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Alignement et espacement du footer */
+footer a {
+    color: #EE8B27;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer a:hover {
+    color: #F2A557;
+}

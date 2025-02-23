@@ -1,0 +1,255 @@
+/* Fond général */
+body {
+    background-color: #171A1F;
+    color: #EAECEF;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+/* Conteneur global pour centrer les cartes */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Espacement entre les cartes */
+    padding: 20px;
+}
+
+/* Cartes */
+.card {
+    background-color: #171A1F;
+    padding: 40px; /* Augmenté pour plus d'espace */
+    border-radius: 24px;
+    border: 1px solid #474D57;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: left; /* Centre tous les éléments à l'intérieur */
+}
+
+/* Cartes plus larges */
+.card-large {
+    width: 800px; /* Largeur augmentée */
+    max-width: 90%; /* Pour éviter les débordements sur petits écrans */
+}
+
+/* Titres */
+.title {
+    text-align: left;
+    font-size: 32px;
+    width: 100%; /* Prend toute la largeur */
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 32px;
+    width: 100%;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+/* Formulaire */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: left;
+    display: block;
+}
+
+/* Champ de saisie */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #474D57;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #EAECEF;
+    outline: none;
+    text-align: left;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+/* Ajout d'une bordure orange au survol */
+input:hover {
+    border: 1px solid #EE8B27;
+}
+
+/* Ajout d'une bordure orange et du curseur orange pendant la saisie */
+input:focus {
+    border: 1px solid #EE8B27;
+    caret-color: #EE8B27;
+}
+
+input::placeholder {
+    color: #474D57;
+}
+
+/* Bouton Connexion */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #EE8B27;
+    border: none;
+    color: #EAECEF;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #F2A557;
+}
+
+/* Barre séparatrice */
+.separator {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+    width: 100%;
+}
+
+.separator span {
+    padding: 0 10px;
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    height: 1px;
+    background: #474D57;
+    position: absolute;
+    width: 40%;
+    top: 50%;
+}
+
+.separator::before {
+    left: 0;
+}
+
+.separator::after {
+    right: 0;
+}
+
+/* Bouton Google */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #474D57;
+    background: transparent;
+    color: #EAECEF;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Alignement du logo Google à gauche et texte centré */
+.google-btn img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.google-btn span {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.google-btn:hover {
+    background-color: #2C333B;
+}
+
+/* Lien d'inscription */
+.register-link {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.register-link a {
+    color: #EE8B27;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    text-decoration: none; /* Supprime le soulignement */
+}
+
+.register-link a:hover {
+    color: #F2A557;
+}
+
+/* Conteneur de la case à cocher */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin-top: 15px; /* Ajoute de l'espace avec le champ précédent */
+    margin-bottom: 20px; /* Ajoute de l'espace avant le bouton */
+    color: #EAECEF; /* Texte en blanc */
+}
+
+/* Style de la checkbox */
+.checkbox-container input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #474D57; /* Même bordure que les champs */
+    background: transparent; /* Fond transparent */
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+/* Effet lorsqu'on coche la case */
+.checkbox-container input[type="checkbox"]:checked {
+    background: #EAECEF; /* Fond blanc */
+    border-color: #474D57;
+}
+
+/* Ajout de la coche grise */
+.checkbox-container input[type="checkbox"]::before {
+    content: "✔";
+    font-size: 14px;
+    color: #474D57; /* Gris comme la bordure */
+    display: none;
+}
+
+/* Affichage de la coche lorsqu'on coche */
+.checkbox-container input[type="checkbox"]:checked::before {
+    display: block;
+}
+
+/* Style du texte */
+.checkbox-container label {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Liens dans le texte */
+.checkbox-container label a {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px dotted #EAECEF; /* Souligné en pointillé */
+}
+
+.checkbox-container label a:hover {
+    text-decoration: none; /* Empêche le soulignement par défaut */
+    border-bottom-color: #BBBBBB; /* Changer la couleur du soulignement au survol */
+    color: #BBBBBB; /* Rendre le texte plus foncé au survol */
+}

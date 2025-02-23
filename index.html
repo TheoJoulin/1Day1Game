@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil | 1Day1Game</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script type="module" src="assets/js/script.js" defer></script>
+    <script src="assets/js/include.js"></script>
+</head>
+<body>
+    
+
+    <div id="header-container"></div>
+
+    <!-- Section des cartes -->
+    <section class="cards-container">
+        <!-- Carte Classement Général -->
+        <div class="card">
+            <h2>Classement Général</h2>
+            <div class="ranking-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nom</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="general-ranking">
+                        <!-- Dynamique via JS -->
+                    </tbody>
+                </table>
+                <div class="scrollable">
+                    <!-- Ajouter une barre de défilement ici -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte du Milieu -->
+        <div class="card middle-card">
+            <h2 id="current-date"></h2>
+            <p>Temps restant : <span id="timer"></span></p>
+            <a href="old/snake.html" class="btn orange">Jouer</a>
+            <h3>Missions</h3>
+            <ul id="missions">
+                <!-- Dynamique via JS -->
+            </ul>
+        </div>
+
+    <!-- Carte Classement du Jour -->
+        <div class="card">
+            <h2>Classement du Jour</h2>
+            <div class="ranking-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nom</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daily-ranking">
+                        <!-- Dynamique via JS -->
+                    </tbody>
+                </table>
+                <div class="scrollable">
+                    <!-- Ajouter une barre de défilement ici -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+</body>
+</html>
